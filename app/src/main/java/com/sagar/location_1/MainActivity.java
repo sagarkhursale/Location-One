@@ -77,13 +77,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         mLocationRequest.setFastestInterval(5000);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            //LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             if (mLastLocation != null) {
                 Log.i(TAG,"Last Location : "+mLastLocation.toString());
                 updateUI(mLastLocation);
             }
+
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
         //
     }
