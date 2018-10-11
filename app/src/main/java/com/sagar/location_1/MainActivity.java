@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         requestUpdatesButton=findViewById(R.id.request_activity_updates_button);
         removeUpdatesButton=findViewById(R.id.remove_activity_updates_button);
 
-        
+
         buildGoogleApiClient();
 
         //
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
+                .addApi(ActivityRecognition.API)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
