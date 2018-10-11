@@ -11,24 +11,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 
+
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+    private static final int LOCATION_PERMISSION_CONSTANT = 101;
     private TextView text_Output;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
-
-    private FusedLocationProviderClient mFusedLocationClient;
 
 
     @Override
@@ -36,13 +33,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        text_Output = findViewById(R.id.txt_OutPut);
+
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
 
-        text_Output = findViewById(R.id.txt_OutPut);
+        //
     }
 
 
@@ -62,17 +61,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+        Log.i(TAG, "GoogleApiClient onConnected");
+
         mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setInterval(1000); // location update time
+        mLocationRequest.setFastestInterval(5000);
 
-        //mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // request permission here.
-            Toast.makeText(this, "Permission Denied..!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_CONSTANT);
+        } else
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
     }
 
 
@@ -80,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public void onConnectionSuspended(int i) {
         Log.i(TAG, "GoogleApiClient connection has been suspended.");
     }
+
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         Log.i(TAG, location.toString());
         text_Output.setText(Double.toString(location.getLatitude()));
     }
+
 
     // END
 }
