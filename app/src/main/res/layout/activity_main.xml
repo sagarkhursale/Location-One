@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:text="@string/latitude"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/black"
         android:fontFamily="sans-serif"
     />
 
@@ -23,7 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/title1"
         android:layout_margin="5dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/black"
         android:fontFamily="sans-serif"
         />
 
@@ -35,7 +37,8 @@
         android:layout_below="@+id/title1"
         android:layout_margin="5dp"
         android:text="@string/latitude"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/black"
         android:fontFamily="sans-serif"
         />
 
@@ -46,7 +49,8 @@
         android:layout_below="@+id/title1"
         android:layout_toEndOf="@+id/title2"
         android:layout_margin="5dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/black"
         android:fontFamily="sans-serif"
         />
 
