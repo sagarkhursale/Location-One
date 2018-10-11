@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int LOCATION_PERMISSION_CONSTANT = 101;
-    private TextView text_Output;
+    private TextView text_Latitude,text_Longitude;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
 
@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        text_Output = findViewById(R.id.txt_OutPut);
+        text_Latitude = findViewById(R.id.txt_latitude);
+        text_Longitude = findViewById(R.id.txt_longitude);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
@@ -91,7 +92,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     public void onLocationChanged(Location location) {
         Log.i(TAG, location.toString());
-        text_Output.setText(Double.toString(location.getLatitude()));
+        text_Latitude.setText(Double.toString(location.getLatitude()));
+        text_Longitude.setText(Double.toString(location.getLongitude()));
     }
 
 
