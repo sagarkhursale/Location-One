@@ -31,6 +31,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         text_Output=findViewById(R.id.txt_OutPut);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mGoogleApiClient.disconnect();
+    }
 
     // END
 }
