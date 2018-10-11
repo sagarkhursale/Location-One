@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         Log.i(TAG, "GoogleApiClient connection has failed.");
     }
 
+
     @SuppressLint("SetTextI18n")
     @Override
     public void onLocationChanged(Location location) {
