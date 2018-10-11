@@ -2,7 +2,11 @@ package com.sagar.location_1;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +19,7 @@ import android.widget.TextView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognition;
+import com.google.android.gms.location.DetectedActivity;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -123,6 +128,47 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private void updateUI(Location location){
         text_Latitude.setText(String.valueOf(location.getLatitude()));
         text_Longitude.setText(String.valueOf(location.getLongitude()));
+    }
+
+
+    /**
+     * Returns a human readable String corresponding to a detected activity type.
+     */
+    public String getActivityString(int detectedActivityType) {
+        Resources resources = this.getResources();
+        switch(detectedActivityType) {
+            case DetectedActivity.IN_VEHICLE:
+                return resources.getString(R.string.in_vehicle);
+            case DetectedActivity.ON_BICYCLE:
+                return resources.getString(R.string.on_bicycle);
+            case DetectedActivity.ON_FOOT:
+                return resources.getString(R.string.on_foot);
+            case DetectedActivity.RUNNING:
+                return resources.getString(R.string.running);
+            case DetectedActivity.STILL:
+                return resources.getString(R.string.still);
+            case DetectedActivity.TILTING:
+                return resources.getString(R.string.tilting);
+            case DetectedActivity.UNKNOWN:
+                return resources.getString(R.string.unknown);
+            case DetectedActivity.WALKING:
+                return resources.getString(R.string.walking);
+            default:
+                return resources.getString(R.string.unidentifiable_activity, detectedActivityType);
+        }
+    }
+
+
+    //nested class
+    public class ActivityDetectionBroadcastReciever extends BroadcastReceiver{
+        private static final String TAG="reciever";
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+        }
+
+        // nested
     }
 
 
