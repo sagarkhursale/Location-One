@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
+
+        text_Output=findViewById(R.id.txt_OutPut);
     }
 
 
