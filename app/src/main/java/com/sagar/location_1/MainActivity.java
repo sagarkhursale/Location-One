@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -23,7 +24,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int LOCATION_PERMISSION_CONSTANT = 101;
 
-    private TextView text_Latitude, text_Longitude;
+    private TextView text_Latitude, text_Longitude,text_Status;
+    private Button requestUpdatesButton;
+    private Button removeUpdatesButton;
 
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
@@ -38,6 +41,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         text_Latitude = findViewById(R.id.txt_latitude);
         text_Longitude = findViewById(R.id.txt_longitude);
 
+        text_Status=findViewById(R.id.detectedActivities);
+        requestUpdatesButton=findViewById(R.id.request_activity_updates_button);
+        removeUpdatesButton=findViewById(R.id.remove_activity_updates_button);
+
+        
         buildGoogleApiClient();
 
         //
